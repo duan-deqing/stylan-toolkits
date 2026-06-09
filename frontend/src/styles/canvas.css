@@ -1,0 +1,69 @@
+.canvas-card {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+}
+
+.canvas-inset {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 12px;
+  border: dashed 2px var(--theme-accent);
+}
+
+.canvas-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-faint);
+  padding: 16px;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.canvas-empty-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  flex-shrink: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--theme-accent);
+  margin-bottom: 8px;
+}
+
+.canvas-empty-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.canvas-empty-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.image-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.canvas-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}

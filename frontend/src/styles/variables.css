@@ -1,0 +1,75 @@
+:root {
+  --bg: #ecedf1;
+  --card-bg: #ecedf1;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-faint: #94a3b8;
+  --input-bg: #edf2f7;
+  --canvas-bg: #edf2f7;
+  --color-primary: #6366f1;
+  --status-bar-bg: #edf2f7;
+  --hover-bg: #eef1f6;
+  --progress-track: #dce2ec;
+  --placeholder-icon: #dce2ec;
+  --card-border: transparent;
+  --input-border-hover: #cbd5e1;
+
+  --theme-accent: #6366f1;
+  --theme-accent-hover: #6365f1c2;
+
+  --fs-xs: 11px;
+  --fs-sm: 12px;
+  --fs-base: 14px;
+  --fs-md: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 22px;
+
+  --shadow-color-light: rgba(255, 255, 255, 0.85);
+  --shadow-color-dark: rgba(0, 0, 0, 0.07);
+  --shadow-raised:
+    -5px -5px 10px 0px var(--shadow-color-light),
+    5px 5px 10px 0px var(--shadow-color-dark);
+  --shadow-inset:
+    inset 2px 2px 6px 0px var(--shadow-color-dark),
+    inset -2px -2px 6px 0px var(--shadow-color-light);
+  --shadow-btn:
+    -3px -3px 8px 0px var(--shadow-color-light),
+    3px 3px 8px 0px var(--shadow-color-dark);
+  --shadow-btn-pressed:
+    inset 2px 2px 5px 0px var(--shadow-color-dark),
+    inset -2px -2px 5px 0px var(--shadow-color-light);
+}
+
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --card-bg: #1a2332;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-faint: #475569;
+  --input-bg: #0f172a;
+  --canvas-bg: #0f172a;
+  --color-primary: #6366f1;
+  --status-bar-bg: #131d2b;
+  --hover-bg: #1e293b;
+  --progress-track: #1a2332;
+  --placeholder-icon: #1a2332;
+  --card-border: transparent;
+  --input-border-hover: #475569;
+
+  --shadow-color-light: rgba(255, 255, 255, 0.035);
+  --shadow-color-dark: rgba(0, 0, 0, 0.35);
+  --shadow-raised:
+    -4px -4px 10px 0px var(--shadow-color-light),
+    4px 4px 10px 0px var(--shadow-color-dark);
+  --shadow-inset:
+    inset 2px 2px 6px 0px var(--shadow-color-dark),
+    inset -2px -2px 6px 0px var(--shadow-color-light);
+  --shadow-btn:
+    -3px -3px 8px 0px var(--shadow-color-light),
+    3px 3px 8px 0px var(--shadow-color-dark);
+  --shadow-btn-pressed:
+    inset 2px 2px 5px 0px var(--shadow-color-dark),
+    inset -2px -2px 5px 0px var(--shadow-color-light);
+}

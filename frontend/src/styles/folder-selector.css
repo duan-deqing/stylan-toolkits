@@ -1,0 +1,86 @@
+.folder-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.folder-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.folder-row label {
+  min-width: 72px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.folder-input-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.folder-input {
+  width: 100%;
+  padding: 8px 36px 8px 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  cursor: default;
+  transition: background .2s, color .2s, box-shadow .2s;
+  font-family: inherit;
+  box-shadow: var(--shadow-inset);
+}
+
+.folder-input:hover {
+  background: var(--hover-bg);
+}
+
+.folder-input::placeholder {
+  color: var(--text-faint);
+}
+
+.folder-input.has-value {
+  background: var(--card-bg);
+  box-shadow: var(--shadow-inset);
+}
+
+.btn-folder {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: var(--card-bg);
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  transition: all .15s;
+  box-shadow: var(--shadow-btn);
+}
+
+.btn-folder:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.btn-folder:active {
+  box-shadow: var(--shadow-btn-pressed);
+}
+
+.btn-folder:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}

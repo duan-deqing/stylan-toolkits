@@ -20,13 +20,13 @@ export async function healthCheck(): Promise<boolean> {
 export async function startProcessing(
   inputDir: string,
   outputDir: string,
-  rect: Rect
+  rects: Rect[]
 ): Promise<void> {
   const baseUrl = await getBaseUrl()
   const res = await fetch(`${baseUrl}/inpaint`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ input_dir: inputDir, output_dir: outputDir, rect }),
+    body: JSON.stringify({ input_dir: inputDir, output_dir: outputDir, rects }),
   })
   if (!res.ok) {
     const err = await res.json().catch(() => ({ detail: 'Unknown error' }))
