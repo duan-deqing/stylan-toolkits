@@ -70,9 +70,7 @@
       "createStartMenuShortcut": true,
       "shortcutName": "STYLAN toolkits",
       "installerSidebar": "build/installer-sidebar.bmp",
-      "installerHeader": "build/installer-header.bmp",
-      "installDir": "C:\\Program Files\\STYLAN toolkits",
-      "installDirKey": "Software\\STYLAN toolkits"
+      "installerHeader": "build/installer-header.bmp"
     },
     "asar": true,
     "asarUnpack": [
