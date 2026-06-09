@@ -22,6 +22,7 @@ export interface ElectronAPI {
   close: () => Promise<void>
   isMaximized: () => Promise<boolean>
   onMaximizedChanged: (callback: (maximized: boolean) => void) => void
+  openExternal: (url: string) => Promise<void>
 }
 
 declare global {

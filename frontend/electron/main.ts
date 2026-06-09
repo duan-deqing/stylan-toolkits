@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron'
+import { app, BrowserWindow, ipcMain, dialog, shell } from 'electron'
 import { spawn, ChildProcess } from 'child_process'
 import path from 'path'
 import fs from 'fs'
@@ -93,6 +93,7 @@ function createWindow() {
     },
     title: "STYLAN's toolkits",
     show: false,
+    icon: path.join(__dirname, '..', 'public', 'favicon.ico'),
   })
 
   mainWindow.on('ready-to-show', () => {
@@ -105,6 +106,18 @@ function createWindow() {
 
   mainWindow.on('unmaximize', () => {
     mainWindow?.webContents.send('window:maximizedChanged', false)
+  })
+
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url)
+    return { action: 'deny' }
+  })
+
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    if (url !== mainWindow?.webContents.getURL()) {
+      event.preventDefault()
+      shell.openExternal(url)
+    }
   })
 
   if (process.env.VITE_DEV_SERVER_URL) {
@@ -186,3 +199,9 @@ ipcMain.handle('file:readImage', async (_event, filePath: string) => {
 })
 
 ipcMain.handle('backend:url', () => BACKEND_URL)
+
+ipcMain.handle('shell:openExternal', async (_event, url: string) => {
+  await shell.openExternal(url)
+})
+
+

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import TitleBar from './components/TitleBar'
 import Sidebar, { PageId } from './components/Sidebar'
+import HomePage from './pages/HomePage'
 import BatchWatermarkPage from './pages/BatchWatermarkPage'
 import SettingsPage from './pages/SettingsPage'
 import PlaceholderPage from './pages/PlaceholderPage'
@@ -11,7 +12,7 @@ import './App.css'
 const DEFAULT_SIDEBAR_WIDTH = 200
 
 function AppInner() {
-  const [page, setPage] = useState<PageId>('batch')
+  const [page, setPage] = useState<PageId>('home')
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [sidebarWidth, setSidebarWidth] = useState(() => {
     const saved = localStorage.getItem('sidebar-width')
@@ -30,6 +31,7 @@ function AppInner() {
       <div className="app-body">
         <Sidebar active={page} onChange={setPage} collapsed={sidebarCollapsed} width={sidebarWidth} onWidthChange={handleWidthChange} onToggleCollapse={() => setSidebarCollapsed(v => !v)} t={t} />
         <main className="main" key={page}>
+          {page === 'home' && <HomePage />}
           {page === 'batch' && <BatchWatermarkPage />}
           {page === 'settings' && <SettingsPage />}
           {page === 'single' && <PlaceholderPage title={t('nav.single')} description={t('placeholder.desc')} />}
