@@ -105,11 +105,15 @@ export default function WatermarkPage() {
       const baseName = extIndex > 0 ? fileName.slice(0, extIndex) : fileName;
       const ext = extIndex > 0 ? fileName.slice(extIndex) : ".png";
 
-      const sep = imagePath.includes("\\") ? "\\" : "/";
-      const dir = imagePath.substring(0, imagePath.lastIndexOf(sep) + 1);
-      const outputPath = outputDir
-        ? `${outputDir.replace(/\\+$/, "")}${sep}${baseName}_processed${ext}`
-        : `${dir}${baseName}_processed${ext}`;
+      let outputPath: string;
+      if (outputDir) {
+        const sep = imagePath.includes("\\") ? "\\" : "/";
+        outputPath = `${outputDir.replace(/\\+$/, "")}${sep}${baseName}_processed${ext}`;
+      } else {
+        const result = await window.electronAPI.saveFile(`${baseName}_processed${ext}`);
+        if (!result) return;
+        outputPath = result;
+      }
 
       setProgress({
         current: 0,

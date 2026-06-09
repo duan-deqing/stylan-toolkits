@@ -1,18 +1,24 @@
+from pathlib import Path
+
 import cv2
 import numpy as np
-from pathlib import Path
+
+from app.config import settings
 
 
 def remove_watermarks(
     img_path: str,
     output_path: str,
     rects: list[tuple[int, int, int, int]],
-    inpaint_radius: int = 3,
-    flags: int = cv2.INPAINT_NS,
+    inpaint_radius: int | None = None,
+    flags: int | None = None,
 ) -> None:
     img = cv2.imread(str(img_path))
     if img is None:
         raise ValueError(f"Cannot read image: {img_path}")
+
+    inpaint_radius = inpaint_radius or settings.default_inpaint_radius
+    flags = flags if flags is not None else settings.default_inpaint_flags
 
     mask = np.zeros(img.shape[:2], dtype=np.uint8)
     for x, y, w, h in rects:
@@ -20,6 +26,14 @@ def remove_watermarks(
 
     result = cv2.inpaint(img, mask, inpaint_radius, flags)
     cv2.imwrite(str(output_path), result)
+
+
+def collect_images(input_dir: str) -> list[str]:
+    path = Path(input_dir)
+    return [
+        str(p) for p in path.iterdir()
+        if p.is_file() and p.suffix.lower() in settings.supported_extensions
+    ]
 
 
 def batch_process(

@@ -51,8 +51,23 @@ stylan-toolkits/
 │   ├── vite.config.ts
 │   └── package.json
 ├── backend/                   # 后端 (Python FastAPI)
-│   ├── main.py                # API 服务（/health, /inpaint, /progress）
-│   ├── processor.py           # OpenCV 图像处理核心
+│   ├── run.py                 # 启动入口
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── config.py          # 应用配置
+│   │   ├── main.py            # FastAPI 应用工厂
+│   │   ├── models/
+│   │   │   ├── __init__.py
+│   │   │   └── schemas.py     # Pydantic 请求/响应模型
+│   │   ├── routers/
+│   │   │   ├── __init__.py
+│   │   │   └── inpaint.py     # API 路由
+│   │   ├── services/
+│   │   │   ├── __init__.py
+│   │   │   └── processor.py   # OpenCV 图像处理核心
+│   │   └── utils/
+│   │       ├── __init__.py
+│   │       └── progress.py    # 线程安全进度跟踪
 │   └── requirements.txt
 ├── .gitignore
 └── README.md

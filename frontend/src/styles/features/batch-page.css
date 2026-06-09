@@ -34,6 +34,7 @@
 }
 
 .batch-side-card {
+  min-width: auto;
   display: flex;
   flex-direction: column;
   height: 100%;

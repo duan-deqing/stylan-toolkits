@@ -19,7 +19,7 @@ function startBackend(): Promise<void> {
   return new Promise((resolve, reject) => {
     const backendDir = getBackendDir()
     const pythonCmd = process.platform === 'win32' ? 'python' : 'python3'
-    const mainPy = path.join(backendDir, 'main.py')
+    const mainPy = path.join(backendDir, 'run.py')
 
     if (!fs.existsSync(mainPy)) {
       console.error(`Backend script not found: ${mainPy}`)

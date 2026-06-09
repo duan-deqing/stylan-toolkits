@@ -1,20 +1,19 @@
 /* common */
-@import './styles/common/variables.css';
-@import './styles/common/base.css';
-@import './styles/common/responsive.css';
-@import './styles/common/card.css';
-@import './styles/common/buttons.css';
+@import "./styles/common/variables.css";
+@import "./styles/common/base.css";
+@import "./styles/common/card.css";
+@import "./styles/common/buttons.css";
 
 /* layout */
-@import './styles/layout/app-layout.css';
-@import './styles/layout/title-bar.css';
-@import './styles/layout/sidebar.css';
+@import "./styles/layout/app-layout.css";
+@import "./styles/layout/title-bar.css";
+@import "./styles/layout/sidebar.css";
 
 /* features */
-@import './styles/features/folder-selector.css';
-@import './styles/features/canvas.css';
-@import './styles/features/progress.css';
-@import './styles/features/batch-page.css';
-@import './styles/features/settings.css';
-@import './styles/features/about.css';
-@import './styles/features/home.css';
+@import "./styles/features/folder-selector.css";
+@import "./styles/features/canvas.css";
+@import "./styles/features/progress.css";
+@import "./styles/features/batch-page.css";
+@import "./styles/features/settings.css";
+@import "./styles/features/about.css";
+@import "./styles/features/home.css";
