@@ -15,6 +15,7 @@ export interface ProcessProgress {
 export interface ElectronAPI {
   selectDirectory: () => Promise<string | null>
   selectFile: (filters?: { name: string; extensions: string[] }[]) => Promise<string | null>
+  saveFile: (defaultName?: string) => Promise<string | null>
   readImage: (filePath: string) => Promise<string>
   getBackendUrl: () => Promise<string>
   minimize: () => Promise<void>

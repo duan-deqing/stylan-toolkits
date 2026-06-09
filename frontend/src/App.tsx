@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import TitleBar from './components/TitleBar'
-import Sidebar, { PageId } from './components/Sidebar'
+import TitleBar from './components/common/TitleBar'
+import Sidebar, { PageId } from './components/common/Sidebar'
 import HomePage from './pages/HomePage'
-import BatchWatermarkPage from './pages/BatchWatermarkPage'
+import WatermarkPage from './pages/WatermarkPage'
 import SettingsPage from './pages/SettingsPage'
-import PlaceholderPage from './pages/PlaceholderPage'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { I18nProvider, useI18n } from './contexts/I18nContext'
 import './App.css'
@@ -27,15 +26,13 @@ function AppInner() {
 
   return (
     <div className="app">
-      <TitleBar />
+      <TitleBar page={page} />
       <div className="app-body">
         <Sidebar active={page} onChange={setPage} collapsed={sidebarCollapsed} width={sidebarWidth} onWidthChange={handleWidthChange} onToggleCollapse={() => setSidebarCollapsed(v => !v)} t={t} />
         <main className="main" key={page}>
           {page === 'home' && <HomePage />}
-          {page === 'batch' && <BatchWatermarkPage />}
+          {page === 'batch' && <WatermarkPage />}
           {page === 'settings' && <SettingsPage />}
-          {page === 'single' && <PlaceholderPage title={t('nav.single')} description={t('placeholder.desc')} />}
-          {page === 'video' && <PlaceholderPage title={t('nav.video')} description={t('placeholder.desc')} />}
         </main>
       </div>
     </div>

@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
+import { useI18n } from '../../contexts/I18nContext'
+import { PageId } from './Sidebar'
 
-export default function TitleBar() {
+export default function TitleBar({ page }: { page: PageId }) {
   const [maximized, setMaximized] = useState(false)
+  const { t } = useI18n()
 
   useEffect(() => {
     if (!window.electronAPI) return
@@ -26,7 +29,7 @@ export default function TitleBar() {
         <span className="title-bar-icon">
           <img src="/favicon.ico" alt="STYLAN's toolkits" className="title-bar-icon-img" />
         </span>
-        <span className="title-bar-text">{`STYLAN's toolkits`}</span>
+        <span className="title-bar-text">{t(`nav.${page}`)}</span>
       </div>
       <div className="title-bar-controls">
         <button className="tb-btn tb-minimize" onClick={handleMinimize} title="最小化">
@@ -36,7 +39,7 @@ export default function TitleBar() {
           {maximized ? (
             <svg width="10" height="10" viewBox="0 0 10 10">
               <rect x="2.5" y="0.5" width="7" height="7" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1"/>
-              <rect x="0.5" y="2.5" width="7" height="7" rx="0.5" fill="#1e1e2e" stroke="currentColor" strokeWidth="1"/>
+              <rect x="0.5" y="2.5" width="7" height="7" rx="0.5" fill="none" stroke="currentColor" strokeWidth="1"/>
             </svg>
           ) : (
             <svg width="10" height="10" viewBox="0 0 10 10">

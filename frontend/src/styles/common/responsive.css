@@ -1,0 +1,164 @@
+@media (max-width: 900px) {
+  .batch-main {
+    flex-direction: column;
+  }
+
+  .batch-side {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .batch-side-card {
+    height: auto;
+  }
+
+  .folder-grid {
+    flex-direction: column;
+  }
+
+  .home-features-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .home-feature-card {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100% !important;
+    flex-direction: row;
+    min-height: 48px;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--sidebar-border);
+  }
+
+  .sidebar.collapsed {
+    width: 100% !important;
+  }
+
+  .sidebar-brand {
+    min-height: 48px;
+    padding: 8px 12px;
+    border-bottom: none;
+    flex-shrink: 0;
+  }
+
+  .sidebar.collapsed .sidebar-brand {
+    padding: 8px 12px;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .sidebar.collapsed .sidebar-brand-left {
+    gap: 10px;
+    justify-content: flex-start;
+  }
+
+  .sidebar.collapsed .sidebar-brand-text {
+    opacity: 1;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    display: inline;
+  }
+
+  .sidebar.collapsed .sidebar-collapse-btn {
+    display: flex;
+  }
+
+  .sidebar-resize-handle {
+    display: none;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    padding: 0;
+    overflow-x: auto;
+    gap: 0;
+  }
+
+  .sidebar-nav-item {
+    width: auto;
+    padding: 12px;
+    border-radius: 0;
+    flex-shrink: 0;
+    justify-content: center;
+  }
+
+  .sidebar-nav-item span {
+    display: none;
+  }
+
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .sidebar-nav-item.active {
+    border-bottom: 2px solid var(--color-primary);
+    border-radius: 0;
+  }
+
+  .title-bar-text {
+    font-size: 11px;
+  }
+
+  .main-scroll {
+    padding: 16px;
+  }
+
+  .batch-page {
+    padding: 12px;
+  }
+
+  .canvas-card {
+    padding: 16px;
+  }
+
+  .side-rects {
+    max-height: 120px;
+  }
+
+  .home-page {
+    padding: 24px 16px;
+    gap: 32px;
+  }
+
+  .setting-options {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-nav-item {
+    padding: 10px 8px;
+  }
+
+  .sidebar-nav-item svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .title-bar-text {
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .folders-card .card-body {
+    padding: 0;
+  }
+
+  .folders-card .card-inset-lg {
+    padding: 8px;
+  }
+}

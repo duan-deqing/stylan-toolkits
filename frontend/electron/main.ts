@@ -191,6 +191,14 @@ ipcMain.handle('dialog:selectFile', async (_event, filters?: { name: string; ext
   return result.canceled ? null : result.filePaths[0]
 })
 
+ipcMain.handle('dialog:saveFile', async (_event, defaultName?: string) => {
+  const result = await dialog.showSaveDialog(mainWindow!, {
+    defaultPath: defaultName,
+    filters: [{ name: 'Images', extensions: ['jpg', 'jpeg', 'png', 'bmp'] }],
+  })
+  return result.canceled ? null : result.filePath
+})
+
 ipcMain.handle('file:readImage', async (_event, filePath: string) => {
   const data = fs.readFileSync(filePath)
   const ext = path.extname(filePath).toLowerCase()

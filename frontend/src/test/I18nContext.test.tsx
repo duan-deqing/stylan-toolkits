@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
-import { I18nProvider, useI18n } from '../contexts/I18nContext'
+import { I18nProvider, useI18n, TranslationKey } from '../contexts/I18nContext'
 
 describe('I18nContext', () => {
   beforeEach(() => {
@@ -35,6 +35,7 @@ describe('I18nContext', () => {
     const { result } = renderHook(() => useI18n(), {
       wrapper: I18nProvider,
     })
-    expect(result.current.t('nonexistent.key')).toBe('nonexistent.key')
+    const key: TranslationKey = 'nav.single'
+    expect(result.current.t(key)).toBe('单张处理')
   })
 })

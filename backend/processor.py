@@ -8,7 +8,7 @@ def remove_watermarks(
     output_path: str,
     rects: list[tuple[int, int, int, int]],
     inpaint_radius: int = 3,
-    flags: int = cv2.INPAINT_TELEA,
+    flags: int = cv2.INPAINT_NS,
 ) -> None:
     img = cv2.imread(str(img_path))
     if img is None:
@@ -26,16 +26,17 @@ def batch_process(
     image_paths: list[str],
     output_dir: str,
     rects: list[tuple[int, int, int, int]],
+    on_progress: callable = None,
 ) -> int:
     out_path = Path(output_dir)
-    out_path.mkdir(parents=True, exist_ok=True)
-
     processed = 0
-    for img_path in image_paths:
+    for i, img_path in enumerate(image_paths):
         try:
             dest = out_path / Path(img_path).name
             remove_watermarks(img_path, str(dest), rects)
             processed += 1
         except Exception as e:
             print(f"Error processing {img_path}: {e}")
+        if on_progress:
+            on_progress(i + 1, processed)
     return processed

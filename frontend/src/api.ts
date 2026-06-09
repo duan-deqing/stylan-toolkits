@@ -34,6 +34,23 @@ export async function startProcessing(
   }
 }
 
+export async function processSingle(
+  inputPath: string,
+  outputPath: string,
+  rects: Rect[]
+): Promise<void> {
+  const baseUrl = await getBaseUrl()
+  const res = await fetch(`${baseUrl}/inpaint-single`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ input_path: inputPath, output_path: outputPath, rects }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: 'Unknown error' }))
+    throw new Error(err.detail || 'Processing failed')
+  }
+}
+
 export async function getProgress(): Promise<ProcessProgress> {
   const baseUrl = await getBaseUrl()
   const res = await fetch(`${baseUrl}/progress`)

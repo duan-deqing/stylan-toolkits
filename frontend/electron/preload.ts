@@ -4,6 +4,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   selectDirectory: () => ipcRenderer.invoke('dialog:selectDirectory'),
   selectFile: (filters?: { name: string; extensions: string[] }[]) =>
     ipcRenderer.invoke('dialog:selectFile', filters),
+  saveFile: (defaultName?: string) =>
+    ipcRenderer.invoke('dialog:saveFile', defaultName),
   readImage: (filePath: string) => ipcRenderer.invoke('file:readImage', filePath),
   getBackendUrl: () => ipcRenderer.invoke('backend:url'),
 

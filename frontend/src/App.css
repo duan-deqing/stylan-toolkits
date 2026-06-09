@@ -1,6 +1,7 @@
 /* common */
 @import './styles/common/variables.css';
 @import './styles/common/base.css';
+@import './styles/common/responsive.css';
 @import './styles/common/card.css';
 @import './styles/common/buttons.css';
 

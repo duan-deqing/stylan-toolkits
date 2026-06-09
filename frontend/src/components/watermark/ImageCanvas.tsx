@@ -1,6 +1,6 @@
 import { useRef, useEffect, useCallback, useState } from "react";
-import { Rect } from "../types";
-import { useI18n } from "../contexts/I18nContext";
+import { Rect } from "../../types";
+import { useI18n } from "../../contexts/I18nContext";
 
 interface Props {
   imageData: string | null;

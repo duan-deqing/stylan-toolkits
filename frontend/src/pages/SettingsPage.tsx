@@ -1,7 +1,7 @@
 import { useTheme, ThemeMode } from '../contexts/ThemeContext'
-import { useI18n, Locale } from '../contexts/I18nContext'
+import { useI18n, Locale, TranslationKey } from '../contexts/I18nContext'
 
-const THEME_OPTIONS: { value: ThemeMode; labelKey: string }[] = [
+const THEME_OPTIONS: { value: ThemeMode; labelKey: TranslationKey }[] = [
   { value: 'light', labelKey: 'settings.theme.light' },
   { value: 'dark', labelKey: 'settings.theme.dark' },
   { value: 'system', labelKey: 'settings.theme.system' },

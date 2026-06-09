@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useRef } from 'react'
+import type { TranslationKey } from '../../contexts/I18nContext'
 
-export type PageId = 'home' | 'batch' | 'single' | 'video' | 'settings'
+export type PageId = 'home' | 'batch' | 'settings'
 
-const MAIN_ITEMS: { id: PageId; labelKey: string }[] = [
+const MAIN_ITEMS: { id: PageId; labelKey: TranslationKey }[] = [
   { id: 'home', labelKey: 'nav.home' },
   { id: 'batch', labelKey: 'nav.batch' },
-  { id: 'single', labelKey: 'nav.single' },
-  { id: 'video', labelKey: 'nav.video' },
 ]
 
 const MIN_WIDTH = 160
@@ -20,7 +19,7 @@ interface Props {
   width: number
   onWidthChange: (w: number) => void
   onToggleCollapse: () => void
-  t: (key: string) => string
+  t: (key: TranslationKey) => string
 }
 
 export default function Sidebar({ active, onChange, collapsed, width, onWidthChange, onToggleCollapse, t }: Props) {
@@ -66,7 +65,7 @@ export default function Sidebar({ active, onChange, collapsed, width, onWidthCha
   return (
     <aside className={asideClass} style={{ width: collapsed ? COLLAPSED_WIDTH : width }}>
       <div className="sidebar-brand">
-        <div className="sidebar-brand-left">
+        <div className="sidebar-brand-left" onClick={onToggleCollapse} style={{ cursor: 'pointer' }}>
           <div className="sidebar-brand-icon">
             <img src="/favicon.ico" alt="STYLAN's toolkits" className="sidebar-brand-icon-img" />
           </div>
@@ -101,18 +100,11 @@ export default function Sidebar({ active, onChange, collapsed, width, onWidthCha
               </svg>
             )}
             {item.id === 'batch' && (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-              </svg>
-            )}
-            {item.id === 'single' && (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
-              </svg>
-            )}
-            {item.id === 'video' && (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="6" y="4" width="14" height="14" rx="2" opacity=".35" />
+                <rect x="4" y="6" width="14" height="14" rx="2" />
+                <circle cx="9" cy="11" r="1.3" />
+                <polyline points="18 17 14 12 7 18" />
               </svg>
             )}
             <span>{t(item.labelKey)}</span>

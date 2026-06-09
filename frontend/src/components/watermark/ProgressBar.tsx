@@ -1,4 +1,4 @@
-import { ProcessProgress } from '../types'
+import { ProcessProgress } from '../../types'
 
 interface Props {
   progress: ProcessProgress
