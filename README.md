@@ -11,29 +11,39 @@ Built with Electron + React + FastAPI + OpenCV
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://www.typescriptlang.org)
 [![Electron](https://img.shields.io/badge/Electron-33-47848F?logo=electron)](https://www.electronjs.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688?logo=fastapi)](https://fastapi.tiangolo.com)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.136-009688?logo=fastapi)](https://fastapi.tiangolo.com)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Release](https://img.shields.io/badge/release-v1.0.0-6366f1)](https://github.com/duan-deqing/stylan-toolkits/releases)
+
+[English](README.md) | [简体中文](README.zh-CN.md)
 
 </div>
 
 ## Table of Contents
 
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Development](#development)
-- [Project Structure](#project-structure)
-- [API Reference](#api-reference)
-- [Build & Release](#build--release)
-- [Configuration](#configuration)
-- [Design](#design)
-- [FAQ](#faq)
-- [Contributing](#contributing)
-- [License](#license)
+- [STYLAN's toolkits](#stylans-toolkits)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Screenshots](#screenshots)
+  - [Tech Stack](#tech-stack)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Development](#development)
+  - [Project Structure](#project-structure)
+  - [API Reference](#api-reference)
+    - [Health Check](#health-check)
+    - [Get Progress](#get-progress)
+    - [Single Image Inpainting](#single-image-inpainting)
+    - [Batch Inpainting](#batch-inpainting)
+  - [Build \& Release](#build--release)
+    - [Build](#build)
+    - [Publish to GitHub Releases](#publish-to-github-releases)
+  - [Configuration](#configuration)
+  - [Design](#design)
+  - [FAQ](#faq)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Features
 
@@ -347,6 +357,7 @@ cd backend && pip install -r requirements.txt
 # Test manually
 cd backend && python run.py
 ```
+
 </details>
 
 <details>
