@@ -1,13 +1,14 @@
 import { useI18n, TranslationKey } from '../contexts/I18nContext'
 import { useTheme } from '../contexts/ThemeContext'
+import type { PageId } from '../components/common/Sidebar'
 
 function tk(s: string): TranslationKey {
   return s as TranslationKey
 }
 
-const FEATURES = [
-  { key: 'batch', icon: 'batch' as const },
-  { key: 'template', icon: 'tools' as const },
+const FEATURES: { key: string; icon: 'batch' | 'tools'; page?: PageId }[] = [
+  { key: 'batch', icon: 'batch', page: 'batch' },
+  { key: 'template', icon: 'tools' },
 ]
 
 function FeatureIcon({ icon }: { icon: 'batch' | 'tools' }) {
@@ -30,7 +31,7 @@ function FeatureIcon({ icon }: { icon: 'batch' | 'tools' }) {
   )
 }
 
-export default function HomePage() {
+export default function HomePage({ onNavigate }: { onNavigate?: (page: PageId) => void }) {
   const { t } = useI18n()
 
   return (
@@ -46,7 +47,14 @@ export default function HomePage() {
       <section className="home-features">
         <div className="home-features-grid">
           {FEATURES.map((f) => (
-            <div key={f.key} className="card home-feature-card">
+            <div
+              key={f.key}
+              className="card home-feature-card"
+              onClick={f.page ? () => onNavigate?.(f.page!) : undefined}
+              role={f.page ? "button" : undefined}
+              tabIndex={f.page ? 0 : undefined}
+              onKeyDown={f.page ? (e) => { if (e.key === 'Enter' || e.key === ' ') onNavigate?.(f.page!) } : undefined}
+            >
               <div className="card-inset home-feature-icon">
                 <FeatureIcon icon={f.icon} />
               </div>

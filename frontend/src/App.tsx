@@ -30,7 +30,7 @@ function AppInner() {
       <div className="app-body">
         <Sidebar active={page} onChange={setPage} collapsed={sidebarCollapsed} width={sidebarWidth} onWidthChange={handleWidthChange} onToggleCollapse={() => setSidebarCollapsed(v => !v)} t={t} />
         <main className="main" key={page}>
-          {page === 'home' && <HomePage />}
+          {page === 'home' && <HomePage onNavigate={setPage} />}
           {page === 'batch' && <WatermarkPage />}
           {page === 'settings' && <SettingsPage />}
         </main>
