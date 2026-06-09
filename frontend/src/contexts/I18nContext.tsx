@@ -4,6 +4,11 @@ export type Locale = 'zh-CN' | 'en-US'
 
 const ZH: Record<string, string> = {
   'brand': "STYLAN's toolkits",
+  'nav.home': '首页',
+  'home.desc': '从侧边栏选择工具开始使用',
+  'home.card.batch': '批量去除多张图片中的水印',
+  'home.card.single': '精确控制单张图片的处理',
+  'home.card.video': '去除视频中的水印',
   'nav.batch': '批量去水印',
   'nav.single': '单张处理',
   'nav.video': '视频去水印',
@@ -38,11 +43,22 @@ const ZH: Record<string, string> = {
   'settings.theme.dark': '深色',
   'settings.theme.system': '系统默认',
   'settings.language': '语言',
+  'about.title': '关于',
+  'about.version': '版本',
+  'about.repository': '开源仓库',
+  'about.tech': '技术栈',
+  'about.tech.frontend': '前端: React 19 + TypeScript + Vite + Electron',
+  'about.tech.backend': '后端: Python FastAPI + OpenCV',
   'placeholder.desc': '此功能正在开发中',
 }
 
 const EN: Record<string, string> = {
   'brand': "STYLAN's toolkits",
+  'nav.home': 'Home',
+  'home.desc': 'Select a tool from the sidebar to get started',
+  'home.card.batch': 'Remove watermarks from multiple images at once',
+  'home.card.single': 'Process one image with precise control',
+  'home.card.video': 'Remove watermarks from videos',
   'nav.batch': 'Batch Removal',
   'nav.single': 'Single Image',
   'nav.video': 'Video Watermark',
@@ -77,6 +93,12 @@ const EN: Record<string, string> = {
   'settings.theme.dark': 'Dark',
   'settings.theme.system': 'System',
   'settings.language': 'Language',
+  'about.title': 'About',
+  'about.version': 'Version',
+  'about.repository': 'Repository',
+  'about.tech': 'Tech Stack',
+  'about.tech.frontend': 'Frontend: React 19 + TypeScript + Vite + Electron',
+  'about.tech.backend': 'Backend: Python FastAPI + OpenCV',
   'placeholder.desc': 'Coming soon',
 }
 
