@@ -19,6 +19,7 @@ export default function ImageCanvas({
 }: Props) {
   const { t } = useI18n();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const insetRef = useRef<HTMLDivElement>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const dimsRef = useRef({
     naturalW: 0,
@@ -47,14 +48,13 @@ export default function ImageCanvas({
   const fitImage = useCallback(() => {
     const img = imgRef.current;
     const canvas = canvasRef.current;
-    if (!img || !canvas) return;
-    const parent = canvas.parentElement;
-    if (!parent) return;
+    const parent = insetRef.current;
+    if (!img || !canvas || !parent) return;
     const pr = parent.getBoundingClientRect();
     const cw = Math.round(pr.width);
     const ch = Math.round(pr.height);
     if (cw <= 0 || ch <= 0) return;
-    const scale = ch / img.naturalHeight;
+    const scale = Math.min(cw / img.naturalWidth, ch / img.naturalHeight);
     const dw = Math.round(img.naturalWidth * scale);
     const dh = Math.round(img.naturalHeight * scale);
     if (canvas.width === dw && canvas.height === dh) return;
@@ -148,9 +148,7 @@ export default function ImageCanvas({
   }, [draw]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const parent = canvas.parentElement;
+    const parent = insetRef.current;
     if (!parent) return;
     const ro = new ResizeObserver(() => {
       if (imgRef.current) fitImage();
@@ -165,9 +163,10 @@ export default function ImageCanvas({
     const br = canvas.getBoundingClientRect();
     const mx = (clientX - br.left) * (canvas.width / br.width);
     const my = (clientY - br.top) * (canvas.height / br.height);
+    const d = dimsRef.current;
     return {
-      x: Math.round(mx * scaleRef.current.x),
-      y: Math.round(my * scaleRef.current.y),
+      x: Math.max(0, Math.min(d.naturalW, Math.round(mx * scaleRef.current.x))),
+      y: Math.max(0, Math.min(d.naturalH, Math.round(my * scaleRef.current.y))),
     };
   };
 
@@ -208,7 +207,14 @@ export default function ImageCanvas({
 
   return (
     <div className="card canvas-card">
-      <div className="card-inset canvas-inset">
+      <div
+        ref={insetRef}
+        className="card-inset canvas-inset"
+        onMouseDown={imageData ? handleMouseDown : undefined}
+        onMouseMove={imageData ? handleMouseMove : undefined}
+        onMouseUp={imageData ? handleMouseUp : undefined}
+        onMouseLeave={imageData ? handleMouseUp : undefined}
+      >
         {showEmpty ? (
           <div className="canvas-empty">
             <div className="card canvas-empty-icon">
@@ -258,10 +264,6 @@ export default function ImageCanvas({
           <canvas
             ref={canvasRef}
             className="image-canvas"
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
             style={{ cursor: "crosshair" }}
           />
         )}

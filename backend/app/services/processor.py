@@ -6,6 +6,24 @@ import numpy as np
 from app.config import settings
 
 
+def _imread_unicode(path: str) -> np.ndarray:
+    buf = np.fromfile(path, dtype=np.uint8)
+    if buf.size == 0:
+        raise ValueError(f"Cannot read image: {path}")
+    img = cv2.imdecode(buf, cv2.IMREAD_COLOR)
+    if img is None:
+        raise ValueError(f"Cannot read image: {path}")
+    return img
+
+
+def _imwrite_unicode(path: str, img: np.ndarray) -> None:
+    ext = Path(path).suffix
+    success, buf = cv2.imencode(ext, img)
+    if not success:
+        raise ValueError(f"Failed to encode image: {path}")
+    buf.tofile(path)
+
+
 def remove_watermarks(
     img_path: str,
     output_path: str,
@@ -13,9 +31,7 @@ def remove_watermarks(
     inpaint_radius: int | None = None,
     flags: int | None = None,
 ) -> None:
-    img = cv2.imread(str(img_path))
-    if img is None:
-        raise ValueError(f"Cannot read image: {img_path}")
+    img = _imread_unicode(img_path)
 
     inpaint_radius = inpaint_radius or settings.default_inpaint_radius
     flags = flags if flags is not None else settings.default_inpaint_flags
@@ -25,7 +41,7 @@ def remove_watermarks(
         mask[y : y + h, x : x + w] = 255
 
     result = cv2.inpaint(img, mask, inpaint_radius, flags)
-    cv2.imwrite(str(output_path), result)
+    _imwrite_unicode(output_path, result)
 
 
 def collect_images(input_dir: str) -> list[str]:

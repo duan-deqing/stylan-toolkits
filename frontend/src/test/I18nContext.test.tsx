@@ -35,7 +35,7 @@ describe('I18nContext', () => {
     const { result } = renderHook(() => useI18n(), {
       wrapper: I18nProvider,
     })
-    const key: TranslationKey = 'nav.single'
-    expect(result.current.t(key)).toBe('单张处理')
+    const key: TranslationKey = 'nav.batch'
+    expect(result.current.t(key)).toBe('图片去水印')
   })
 })

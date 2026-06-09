@@ -12,16 +12,17 @@ export type TranslationKey =
   | "brand"
   | "nav.home"
   | "nav.batch"
-  | "nav.single"
-  | "nav.video"
   | "nav.settings"
   | "home.desc"
   | "home.card.batch"
-  | "home.card.single"
-  | "home.card.video"
   | "home.card.batch.title"
-  | "home.card.single.title"
-  | "home.card.video.title"
+  | "home.card.template"
+  | "home.card.template.title"
+  | "tag.batch"
+  | "tag.single"
+  | "tag.inpaint"
+  | "tag.coming"
+  | "tag.preview"
   | "folder.input"
   | "folder.output"
   | "folder.placeholder"
@@ -62,18 +63,19 @@ export type TranslationKey =
 const zhCN: Record<TranslationKey, string> = {
   brand: "STYLAN's toolkits",
   "nav.home": "首页",
-  "nav.batch": "图片水印",
-  "nav.single": "单张处理",
-  "nav.video": "视频去水印",
+  "nav.batch": "图片去水印",
   "nav.settings": "设置",
 
   "home.desc": "从侧边栏选择工具开始使用",
-  "home.card.batch": "批量去除多张图片中的水印",
-  "home.card.single": "精确控制单张图片的处理",
-  "home.card.video": "去除视频中的水印",
-  "home.card.batch.title": "批量去水印",
-  "home.card.single.title": "单张处理",
-  "home.card.video.title": "视频去水印",
+  "home.card.batch": "标记水印位置，一键智能去除",
+  "home.card.batch.title": "图片去水印",
+  "home.card.template": "更多实用工具即将上线",
+  "home.card.template.title": "更多工具",
+  "tag.batch": "批量处理",
+  "tag.single": "单张处理",
+  "tag.inpaint": "智能修复",
+  "tag.coming": "即将上线",
+  "tag.preview": "预告",
 
   "folder.input": "输入目录",
   "folder.output": "输出目录",
@@ -122,18 +124,19 @@ const zhCN: Record<TranslationKey, string> = {
 const enUS: Record<TranslationKey, string> = {
   brand: "STYLAN's toolkits",
   "nav.home": "Home",
-  "nav.batch": "Batch Removal",
-  "nav.single": "Single Image",
-  "nav.video": "Video Watermark",
+  "nav.batch": "Image Watermark",
   "nav.settings": "Settings",
 
   "home.desc": "Select a tool from the sidebar to get started",
-  "home.card.batch": "Remove watermarks from multiple images at once",
-  "home.card.single": "Process one image with precise control",
-  "home.card.video": "Remove watermarks from videos",
-  "home.card.batch.title": "Batch Removal",
-  "home.card.single.title": "Single Image",
-  "home.card.video.title": "Video Watermark",
+  "home.card.batch": "Mark watermark areas and remove them with one click",
+  "home.card.batch.title": "Image Watermark Remover",
+  "home.card.template": "More tools are on the way",
+  "home.card.template.title": "More Tools",
+  "tag.batch": "Batch",
+  "tag.single": "Single",
+  "tag.inpaint": "AI Inpaint",
+  "tag.coming": "Coming Soon",
+  "tag.preview": "Preview",
 
   "folder.input": "Input Directory",
   "folder.output": "Output Directory",

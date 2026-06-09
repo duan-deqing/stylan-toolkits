@@ -44,7 +44,12 @@ def inpaint_single(req: SingleInpaintRequest):
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     rect_tuples = [(r.x, r.y, r.w, r.h) for r in req.rects]
-    remove_watermarks(req.input_path, req.output_path, rect_tuples)
+    try:
+        remove_watermarks(req.input_path, req.output_path, rect_tuples)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
+    except Exception as e:
+        raise HTTPException(500, f"Unexpected error processing image: {e}")
 
     return InpaintResponse(message="Done", output_path=req.output_path)
 
