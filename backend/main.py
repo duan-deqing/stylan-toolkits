@@ -16,10 +16,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class Rect(BaseModel):
+    x: int
+    y: int
+    w: int
+    h: int
+
 class InpaintRequest(BaseModel):
     input_dir: str
     output_dir: str
-    rects: list[tuple[int, int, int, int]]
+    rects: list[Rect]
 
 progress = {
     "current": 0,
@@ -70,9 +76,10 @@ def inpaint(req: InpaintRequest):
 
     def run():
         processed = 0
+        rect_tuples = [(r.x, r.y, r.w, r.h) for r in req.rects]
         for i, img_path in enumerate(image_paths):
             try:
-                batch_process([img_path], req.output_dir, req.rects)
+                batch_process([img_path], req.output_dir, rect_tuples)
                 processed += 1
             except Exception as e:
                 print(f"Error: {e}")

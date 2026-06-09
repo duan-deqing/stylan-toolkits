@@ -1,14 +1,19 @@
-@import './styles/variables.css';
-@import './styles/base.css';
-@import './styles/app-layout.css';
-@import './styles/title-bar.css';
-@import './styles/sidebar.css';
-@import './styles/card.css';
-@import './styles/buttons.css';
-@import './styles/folder-selector.css';
-@import './styles/canvas.css';
-@import './styles/progress.css';
-@import './styles/batch-page.css';
-@import './styles/settings.css';
-@import './styles/about.css';
-@import './styles/home.css';
+/* common */
+@import './styles/common/variables.css';
+@import './styles/common/base.css';
+@import './styles/common/card.css';
+@import './styles/common/buttons.css';
+
+/* layout */
+@import './styles/layout/app-layout.css';
+@import './styles/layout/title-bar.css';
+@import './styles/layout/sidebar.css';
+
+/* features */
+@import './styles/features/folder-selector.css';
+@import './styles/features/canvas.css';
+@import './styles/features/progress.css';
+@import './styles/features/batch-page.css';
+@import './styles/features/settings.css';
+@import './styles/features/about.css';
+@import './styles/features/home.css';

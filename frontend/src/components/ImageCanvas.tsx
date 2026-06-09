@@ -20,53 +20,64 @@ export default function ImageCanvas({
   const { t } = useI18n();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
+  const dimsRef = useRef({
+    naturalW: 0,
+    naturalH: 0,
+    displayW: 0,
+    displayH: 0,
+  });
   const [dims, setDims] = useState({
     naturalW: 0,
     naturalH: 0,
     displayW: 0,
     displayH: 0,
-    offsetX: 0,
-    offsetY: 0,
   });
   const drawing = useRef(false);
   const startPos = useRef({ x: 0, y: 0 });
   const currentRect = useRef<Rect | null>(null);
   const drawRef = useRef<() => void>(() => {});
+  const scaleRef = useRef({ x: 1, y: 1 });
 
-  const scaleX = dims.naturalW / dims.displayW || 1;
-  const scaleY = dims.naturalH / dims.displayH || 1;
+  dimsRef.current = dims;
+  scaleRef.current = {
+    x: dimsRef.current.naturalW / dimsRef.current.displayW || 1,
+    y: dimsRef.current.naturalH / dimsRef.current.displayH || 1,
+  };
 
   const fitImage = useCallback(() => {
     const img = imgRef.current;
     const canvas = canvasRef.current;
     if (!img || !canvas) return;
-    const br = canvas.getBoundingClientRect();
-    const cw = Math.round(br.width);
-    const ch = Math.round(br.height);
+    const parent = canvas.parentElement;
+    if (!parent) return;
+    const pr = parent.getBoundingClientRect();
+    const cw = Math.round(pr.width);
+    const ch = Math.round(pr.height);
     if (cw <= 0 || ch <= 0) return;
-    const scale = Math.min(cw / img.naturalWidth, ch / img.naturalHeight, 1);
+    const scale = ch / img.naturalHeight;
     const dw = Math.round(img.naturalWidth * scale);
     const dh = Math.round(img.naturalHeight * scale);
-    const ox = Math.round((cw - dw) / 2);
-    const oy = Math.round((ch - dh) / 2);
-    canvas.width = cw;
-    canvas.height = ch;
-    setDims({
+    if (canvas.width === dw && canvas.height === dh) return;
+    canvas.width = dw;
+    canvas.height = dh;
+    const newDims = {
       naturalW: img.naturalWidth,
       naturalH: img.naturalHeight,
       displayW: dw,
       displayH: dh,
-      offsetX: ox,
-      offsetY: oy,
-    });
+    };
+    dimsRef.current = newDims;
+    setDims(newDims);
+    drawRef.current();
   }, []);
 
   const drawRect = useCallback(
     (ctx: CanvasRenderingContext2D, r: Rect, index?: number) => {
-      const rx = r.x / scaleX + dims.offsetX;
-      const ry = r.y / scaleY + dims.offsetY;
-      const rw = r.w / scaleX;
-      const rh = r.h / scaleY;
+      const s = scaleRef.current;
+      const rx = r.x / s.x;
+      const ry = r.y / s.y;
+      const rw = r.w / s.x;
+      const rh = r.h / s.y;
 
       ctx.fillStyle = "rgba(99, 102, 241, 0.08)";
       ctx.fillRect(rx, ry, rw, rh);
@@ -92,10 +103,8 @@ export default function ImageCanvas({
       ctx.fillStyle = "#fff";
       ctx.fillText(label, rx + 5, ry - 6);
     },
-    [dims, scaleX, scaleY],
-  );
-
-  const draw = useCallback(() => {
+    [],
+  );  const draw = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -103,13 +112,8 @@ export default function ImageCanvas({
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (imgRef.current) {
-      ctx.drawImage(
-        imgRef.current,
-        dims.offsetX,
-        dims.offsetY,
-        dims.displayW,
-        dims.displayH,
-      );
+      const d = dimsRef.current;
+      ctx.drawImage(imgRef.current, 0, 0, d.displayW, d.displayH);
 
       rects.forEach((r, i) => drawRect(ctx, r, i));
 
@@ -117,7 +121,7 @@ export default function ImageCanvas({
         drawRect(ctx, currentRect.current);
       }
     }
-  }, [rects, drawRect, dims]);
+  }, [rects, drawRect]);
 
   drawRef.current = draw;
 
@@ -146,10 +150,12 @@ export default function ImageCanvas({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const parent = canvas.parentElement;
+    if (!parent) return;
     const ro = new ResizeObserver(() => {
       if (imgRef.current) fitImage();
     });
-    ro.observe(canvas);
+    ro.observe(parent);
     return () => ro.disconnect();
   }, [fitImage]);
 
@@ -157,13 +163,11 @@ export default function ImageCanvas({
     const canvas = canvasRef.current;
     if (!canvas) return { x: 0, y: 0 };
     const br = canvas.getBoundingClientRect();
-    const bx = (clientX - br.left) * (canvas.width / br.width);
-    const by = (clientY - br.top) * (canvas.height / br.height);
-    const mx = bx - dims.offsetX;
-    const my = by - dims.offsetY;
+    const mx = (clientX - br.left) * (canvas.width / br.width);
+    const my = (clientY - br.top) * (canvas.height / br.height);
     return {
-      x: Math.round(mx * scaleX),
-      y: Math.round(my * scaleY),
+      x: Math.round(mx * scaleRef.current.x),
+      y: Math.round(my * scaleRef.current.y),
     };
   };
 

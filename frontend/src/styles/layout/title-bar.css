@@ -1,6 +1,6 @@
 .title-bar {
   height: 36px;
-  background: #1e1e2e;
+  background: var(--titlebar-bg);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,7 +43,7 @@
 .title-bar-text {
   font-size: 12px;
   font-weight: 600;
-  color: #cbd5e1;
+  color: var(--titlebar-text);
   letter-spacing: -.2px;
 }
 
@@ -59,7 +59,7 @@
   height: 100%;
   border: none;
   background: transparent;
-  color: #94a3b8;
+  color: var(--sidebar-text-secondary);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -68,11 +68,11 @@
 }
 
 .tb-btn:hover {
-  background: rgba(255,255,255,.08);
-  color: #e2e8f0;
+  background: var(--titlebar-btn-hover-bg);
+  color: var(--titlebar-btn-hover-color);
 }
 
 .tb-close:hover {
-  background: #ef4444;
-  color: #fff;
+  background: var(--titlebar-btn-close-hover-bg);
+  color: var(--titlebar-btn-close-hover-color);
 }
