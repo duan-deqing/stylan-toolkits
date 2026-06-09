@@ -89,7 +89,7 @@ export default function Sidebar({
         >
           <div className="sidebar-brand-icon">
             <img
-              src="/favicon.ico"
+              src="favicon.ico"
               alt="STYLAN's toolkits"
               className="sidebar-brand-icon-img"
             />

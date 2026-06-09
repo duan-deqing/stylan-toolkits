@@ -93,7 +93,7 @@ function createWindow() {
     },
     title: "STYLAN's toolkits",
     show: false,
-    icon: path.join(__dirname, '..', 'public', 'favicon.ico'),
+    icon: path.join(__dirname, '..', 'dist', 'favicon.ico'),
   })
 
   mainWindow.on('ready-to-show', () => {

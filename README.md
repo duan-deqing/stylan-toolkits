@@ -1,127 +1,376 @@
+<div align="center">
+
+<img src="frontend/public/favicon.ico" width="80" alt="STYLAN's toolkits" />
+
 # STYLAN's toolkits
 
-基于 React + Vite + Electron + FastAPI 的桌面工具集应用。
+A modern desktop application for intelligent image watermark removal.
 
-## 功能
+Built with Electron + React + FastAPI + OpenCV
 
-- **批量去水印**：选择图片目录，标记水印区域，批量移除
-- **单张处理**（开发中）：精确控制单张图片的水印去除
-- **视频去水印**（开发中）：去除视频中的水印
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://www.typescriptlang.org)
+[![Electron](https://img.shields.io/badge/Electron-33-47848F?logo=electron)](https://www.electronjs.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110-009688?logo=fastapi)](https://fastapi.tiangolo.com)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Release](https://img.shields.io/badge/release-v1.0.0-6366f1)](https://github.com/duan-deqing/stylan-toolkits/releases)
 
-## 技术栈
+</div>
 
-| 层级 | 技术 |
-|------|------|
-| 前端框架 | React 19 + TypeScript |
-| 构建工具 | Vite |
-| 桌面壳 | Electron（无边框窗口） |
-| 后端 | Python FastAPI + OpenCV |
-| 测试 | Vitest + Testing Library |
+## Table of Contents
 
-## 项目结构
+- [Features](#features)
+- [Screenshots](#screenshots)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Development](#development)
+- [Project Structure](#project-structure)
+- [API Reference](#api-reference)
+- [Build & Release](#build--release)
+- [Configuration](#configuration)
+- [Design](#design)
+- [FAQ](#faq)
+- [Contributing](#contributing)
+- [License](#license)
 
-```txt
-stylan-toolkits/
-├── frontend/                  # 前端 (React + Electron)
-│   ├── electron/
-│   │   ├── main.ts            # Electron 主进程
-│   │   └── preload.ts         # 上下文桥接
-│   ├── src/
-│   │   ├── components/        # UI 组件
-│   │   │   ├── Sidebar.tsx    # 可折叠侧边栏
-│   │   │   ├── TitleBar.tsx   # 自定义标题栏
-│   │   │   ├── ImageCanvas.tsx# 图片画布 + 选区
-│   │   │   ├── FolderSelector.tsx
-│   │   │   ├── ControlPanel.tsx
-│   │   │   └── ProgressBar.tsx
-│   │   ├── contexts/
-│   │   │   ├── ThemeContext.tsx# 主题（亮/暗/系统）
-│   │   │   └── I18nContext.tsx # 国际化（中/英）
-│   │   ├── pages/
-│   │   │   ├── HomePage.tsx
-│   │   │   ├── BatchWatermarkPage.tsx
-│   │   │   ├── SettingsPage.tsx
-│   │   │   └── PlaceholderPage.tsx
-│   │   ├── test/              # 测试文件
-│   │   ├── api.ts             # 后端 API 调用
-│   │   ├── types.ts           # 类型定义
-│   │   └── App.tsx            # 根组件
-│   ├── public/favicon.ico     # 应用图标
-│   ├── index.html
-│   ├── vite.config.ts
-│   └── package.json
-├── backend/                   # 后端 (Python FastAPI)
-│   ├── run.py                 # 启动入口
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── config.py          # 应用配置
-│   │   ├── main.py            # FastAPI 应用工厂
-│   │   ├── models/
-│   │   │   ├── __init__.py
-│   │   │   └── schemas.py     # Pydantic 请求/响应模型
-│   │   ├── routers/
-│   │   │   ├── __init__.py
-│   │   │   └── inpaint.py     # API 路由
-│   │   ├── services/
-│   │   │   ├── __init__.py
-│   │   │   └── processor.py   # OpenCV 图像处理核心
-│   │   └── utils/
-│   │       ├── __init__.py
-│   │       └── progress.py    # 线程安全进度跟踪
-│   └── requirements.txt
-├── .gitignore
-└── README.md
-```
+## Features
 
-## 开发
+- **Batch Processing** — Select an entire folder of images, mark the watermark area once, and process all images in parallel with real-time progress tracking.
+- **Single Image Mode** — Precision control over individual images with an interactive canvas. Prompt file-save dialog when no output directory is specified.
+- **Smart Inpainting** — Powered by OpenCV's Telea and Navier-Stokes algorithms for seamless watermark removal.
+- **Wide Format Support** — JPG, PNG, BMP, TIFF, and more.
+- **Unicode Paths** — Full support for file paths containing Chinese characters and special symbols.
+- **Neumorphism UI** — Soft shadows, inset cards, light/dark/system themes with smooth transitions.
+- **i18n** — Simplified Chinese / English bilingual interface.
+- **Frameless Window** — Custom title bar with drag region, collapsible sidebar with adjustable width (160–320px).
 
-### 环境要求
+## Screenshots
 
-- Node.js >= 18
-- Python >= 3.10
-- npm 或 yarn
+> *Coming soon*
 
-### 安装
+## Tech Stack
 
-```ash
+| Layer | Technology | Description |
+|---|---|---|
+| **Frontend** | React 19 + TypeScript | UI framework with strict type checking |
+| **Bundler** | Vite 6 | Fast HMR and optimized production builds |
+| **Desktop** | Electron 33 | Cross-platform desktop shell with frameless window |
+| **Backend** | Python FastAPI + OpenCV | HTTP API with image processing pipeline |
+| **Packaging** | electron-builder | NSIS installer + portable executable for Windows |
+| **Testing** | Vitest + Testing Library | Unit and component testing |
+| **i18n** | React Context | Lightweight bilingual support (zh-CN / en-US) |
 
-# 前端依赖
+## Getting Started
 
+### Prerequisites
+
+| Dependency | Version | Installation |
+|---|---|---|
+| Node.js | ≥ 18 | [nodejs.org](https://nodejs.org) |
+| npm | ≥ 9 | Bundled with Node.js |
+| Python | ≥ 3.10 | [python.org](https://python.org) |
+| pip | latest | Bundled with Python |
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/duan-deqing/stylan-toolkits.git
+cd stylan-toolkits
+
+# Install frontend dependencies
 cd frontend && npm install
 
-# 后端依赖
-
-cd backend && pip install -r requirements.txt
+# Install backend dependencies
+cd ../backend && pip install -r requirements.txt
 ```
 
-### 启动
+### Development
 
-```ash
-cd frontend && npm run dev
+```bash
+# Start full dev environment (Vite + Electron + Backend)
+cd frontend && npm run electron:dev
 ```
 
-Electron 主进程会自动启动 Python 后端（端口 8766），窗口就绪前会等待后端健康检查通过。
+This launches three processes simultaneously:
 
-### 测试
+1. **Vite dev server** — `http://localhost:5173` with hot module replacement
+2. **Electron window** — auto-opens after Vite is ready
+3. **Python backend** — `http://127.0.0.1:8766`, managed by Electron lifecycle
 
-```ash
-cd frontend && npm run test
+**Other useful commands:**
+
+```bash
+# Frontend only (no Electron)
+npm run dev
+
+# TypeScript type check
+npx tsc --noEmit
+
+# Run tests
+npm run test
+
+# Watch tests
+npm run test:watch
 ```
 
-## 构建
+## Project Structure
 
-```ash
+```
+stylan-toolkits/
+│
+├── frontend/                          # Electron + React
+│   ├── electron/
+│   │   ├── main.ts                    # Main process: window, backend lifecycle
+│   │   └── preload.ts                 # Context bridge for IPC
+│   ├── src/
+│   │   ├── api.ts                     # API client for backend
+│   │   ├── types.ts                   # Shared TypeScript types
+│   │   ├── App.tsx                    # Root component with routing
+│   │   ├── components/
+│   │   │   ├── common/
+│   │   │   │   ├── Sidebar.tsx        # Collapsible sidebar (draggable)
+│   │   │   │   └── TitleBar.tsx       # Custom frameless title bar
+│   │   │   └── watermark/
+│   │   │       ├── ImageCanvas.tsx    # Canvas rendering + selection
+│   │   │       ├── FoldersCard.tsx    # Directory/file input card
+│   │   │       ├── FolderSelector.tsx
+│   │   │       ├── FileSelector.tsx
+│   │   │       ├── OperationPanel.tsx # Mode toggle + actions
+│   │   │       └── ProgressBar.tsx
+│   │   ├── contexts/
+│   │   │   ├── ThemeContext.tsx       # light / dark / system
+│   │   │   └── I18nContext.tsx        # zh-CN / en-US
+│   │   ├── pages/
+│   │   │   ├── HomePage.tsx           # Landing with feature cards
+│   │   │   ├── WatermarkPage.tsx      # Main workspace
+│   │   │   └── SettingsPage.tsx       # Theme, language, about
+│   │   ├── styles/                    # Modular CSS (by feature)
+│   │   └── test/                      # Vitest test files
+│   ├── public/
+│   │   ├── favicon.ico                # App icon
+│   │   └── icon-512.png               # macOS icon source
+│   ├── package.json                   # Scripts + electron-builder config
+│   ├── vite.config.ts
+│   └── tsconfig.json
+│
+├── backend/                           # Python FastAPI
+│   ├── run.py                         # Entry point
+│   ├── app/
+│   │   ├── config.py                  # Settings (port, host, formats)
+│   │   ├── main.py                    # FastAPI app factory
+│   │   ├── models/schemas.py          # Pydantic models
+│   │   ├── routers/inpaint.py         # API endpoints
+│   │   ├── services/processor.py      # OpenCV watermark removal
+│   │   └── utils/progress.py          # Thread-safe progress tracker
+│   └── requirements.txt
+│
+├── BUILD.md                           # Build & packaging guide
+├── README.md
+└── .gitignore
+```
+
+## API Reference
+
+The backend runs at `http://127.0.0.1:8766`.
+
+### Health Check
+
+```http
+GET /health
+```
+
+**Response** `200`
+
+```json
+{ "status": "ok" }
+```
+
+### Get Progress
+
+```http
+GET /progress
+```
+
+**Response** `200`
+
+```json
+{
+  "current": 5,
+  "total": 10,
+  "status": "processing",
+  "message": "",
+  "processed": 5
+}
+```
+
+> `status` values: `idle` | `processing` | `done` | `error`
+
+### Single Image Inpainting
+
+```http
+POST /inpaint-single
+Content-Type: application/json
+```
+
+**Request Body**
+
+```json
+{
+  "input_path": "C:/photos/image.jpg",
+  "output_path": "C:/photos/result.jpg",
+  "rects": [
+    { "x": 100, "y": 50, "w": 200, "h": 80 }
+  ]
+}
+```
+
+**Response** `200`
+
+```json
+{
+  "message": "Done",
+  "output_path": "C:/photos/result.jpg",
+  "total": null
+}
+```
+
+### Batch Inpainting
+
+```http
+POST /inpaint
+Content-Type: application/json
+```
+
+**Request Body**
+
+```json
+{
+  "input_dir": "C:/photos/inputs",
+  "output_dir": "C:/photos/outputs",
+  "rects": [
+    { "x": 100, "y": 50, "w": 200, "h": 80 }
+  ]
+}
+```
+
+**Response** `200`
+
+```json
+{
+  "message": "Processing started",
+  "total": 42
+}
+```
+
+> Processing runs in a background thread. Poll `/progress` for status.
+
+**Error Responses**
+
+| Status | Cause |
+|---|---|
+| `400` | Missing or invalid input/output path, no rectangles, or image cannot be decoded |
+| `500` | Unexpected server error |
+
+## Build & Release
+
+### Build
+
+```bash
 cd frontend && npm run electron:build
 ```
 
-构建产物输出到 rontend/release/。
+Artifacts are generated in `frontend/release/`:
 
-## 配置
+| Artifact | Description |
+|---|---|
+| `STYLAN toolkits Setup x.x.x.exe` | NSIS installer |
+| `STYLAN toolkits x.x.x.exe` | Portable executable |
+| `win-unpacked/` | Unpacked app directory |
 
-- **主题**：亮色 / 暗色 / 跟随系统（设置页切换）
-- **语言**：简体中文 / English（设置页切换）
-- **侧边栏**：可折叠、可拖拽调整宽度（160-320px），宽度自动保存
+### Publish to GitHub Releases
 
-## 开源协议
+```bash
+# Set version
+VERSION=1.0.0
 
-MIT
+# Create release
+gh release create v$VERSION \
+  "frontend/release/STYLAN toolkits Setup $VERSION.exe" \
+  "frontend/release/STYLAN toolkits $VERSION.exe" \
+  --title "v$VERSION" \
+  --generate-notes
+```
+
+For detailed build instructions, see [BUILD.md](BUILD.md).
+
+## Configuration
+
+All preferences are persisted in `localStorage`:
+
+| Setting | Options | Default |
+|---|---|---|
+| Theme | Light / Dark / System | System |
+| Language | zh-CN / en-US | zh-CN |
+| Sidebar Width | 160px – 320px | 200px |
+
+## Design
+
+The UI follows **Neumorphism** (soft UI) design principles:
+
+| Token | Value |
+|---|---|
+| Primary Color | `#6366f1` (Indigo) |
+| Light Background | `#ecedf1` |
+| Dark Background | `#0f172a` |
+| Border Radius | 12 – 16px |
+| Shadow | Dual-shadow (highlight + shade) for raised/inset effects |
+| Typography | System font stack, clean sans-serif |
+
+## FAQ
+
+<details>
+<summary><strong>Why doesn't the app icon display?</strong></summary>
+
+Use relative paths in `<img>` tags (`favicon.ico`) instead of absolute paths (`/favicon.ico`). Electron loads pages via `file://` protocol, where absolute paths resolve to the filesystem root.
+</details>
+
+<details>
+<summary><strong>Backend fails to start</strong></summary>
+
+```bash
+# Verify dependencies
+cd backend && pip install -r requirements.txt
+
+# Test manually
+cd backend && python run.py
+```
+</details>
+
+<details>
+<summary><strong>Images with Chinese/special characters won't open</strong></summary>
+
+This is already handled — the backend uses `np.fromfile` + `cv2.imdecode` instead of `cv2.imread` to support Unicode paths.
+</details>
+
+<details>
+<summary><strong>How to build for macOS?</strong></summary>
+
+macOS builds require a Mac. The configuration is already in place — run `npm run electron:build` on a Mac to generate `.dmg` and `.zip` packages.
+</details>
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feat/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feat/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+[MIT](LICENSE) © STYLAN

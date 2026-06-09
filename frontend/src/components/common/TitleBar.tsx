@@ -27,7 +27,7 @@ export default function TitleBar({ page }: { page: PageId }) {
     <div className="title-bar">
       <div className="title-bar-drag">
         <span className="title-bar-icon">
-          <img src="/favicon.ico" alt="STYLAN's toolkits" className="title-bar-icon-img" />
+          <img src="favicon.ico" alt="STYLAN's toolkits" className="title-bar-icon-img" />
         </span>
         <span className="title-bar-text">{t(`nav.${page}`)}</span>
       </div>

@@ -38,7 +38,7 @@ export default function HomePage({ onNavigate }: { onNavigate?: (page: PageId) =
     <div className="main-scroll home-page">
       <section className="home-hero">
         <div className="home-hero-icon">
-          <img src="/favicon.ico" alt="STYLAN's toolkits" />
+          <img src="favicon.ico" alt="STYLAN's toolkits" />
         </div>
         <h1 className="home-hero-title">STYLAN's toolkits</h1>
         <p className="home-hero-desc">{t('home.desc')}</p>
