@@ -68,7 +68,9 @@
       "installerHeaderIcon": "public/favicon.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "STYLAN toolkits"
+      "shortcutName": "STYLAN toolkits",
+      "installerSidebar": "build/installer-sidebar.bmp",
+      "installerHeader": "build/installer-header.bmp"
     },
     "asar": true,
     "asarUnpack": [
