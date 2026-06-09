@@ -35,7 +35,7 @@
   },
   "build": {
     "appId": "com.stylan.toolkits",
-    "productName": "STYLAN's toolkits",
+    "productName": "STYLAN toolkits",
     "directories": {
       "output": "release"
     },
@@ -68,7 +68,7 @@
       "installerHeaderIcon": "public/favicon.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "STYLAN's toolkits"
+      "shortcutName": "STYLAN toolkits"
     },
     "asar": true,
     "asarUnpack": [
