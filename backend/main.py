@@ -3,6 +3,7 @@ import threading
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from pathlib import Path
 
 from processor import batch_process
 
@@ -18,13 +19,13 @@ app.add_middleware(
 class InpaintRequest(BaseModel):
     input_dir: str
     output_dir: str
-    rect: tuple[int, int, int, int]
+    rects: list[tuple[int, int, int, int]]
 
 progress = {
     "current": 0,
     "total": 0,
     "status": "idle",
-    "message": "就绪",
+    "message": "",
 }
 
 progress_lock = threading.Lock()
@@ -47,10 +48,8 @@ def inpaint(req: InpaintRequest):
         raise HTTPException(400, "No input directory provided")
     if not req.output_dir:
         raise HTTPException(400, "No output directory provided")
-
-    x, y, w, h = req.rect
-    if w <= 0 or h <= 0:
-        raise HTTPException(400, "Invalid rectangle dimensions")
+    if not req.rects:
+        raise HTTPException(400, "No rectangles provided")
 
     ext_set = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
     input_path = Path(req.input_dir)
@@ -67,13 +66,13 @@ def inpaint(req: InpaintRequest):
 
     total = len(image_paths)
     with progress_lock:
-        progress.update(current=0, total=total, status="processing", message="正在处理...")
+        progress.update(current=0, total=total, status="processing", message="")
 
     def run():
         processed = 0
         for i, img_path in enumerate(image_paths):
             try:
-                batch_process([img_path], req.output_dir, (x, y, w, h))
+                batch_process([img_path], req.output_dir, req.rects)
                 processed += 1
             except Exception as e:
                 print(f"Error: {e}")
@@ -84,7 +83,7 @@ def inpaint(req: InpaintRequest):
                 current=processed,
                 total=total,
                 status="done",
-                message=f"处理完成！共处理 {processed}/{total} 张图片",
+                message=f"done",
             )
 
     thread = threading.Thread(target=run, daemon=True)

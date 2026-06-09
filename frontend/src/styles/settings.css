@@ -1,0 +1,41 @@
+.setting-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.setting-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--card-border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-secondary);
+  transition: all .15s;
+  width: 100%;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.setting-option:hover {
+  border-color: var(--input-border-hover);
+  background: var(--hover-bg);
+}
+
+.setting-option.active {
+  border-color: #6366f1;
+  background: rgba(99, 102, 241, .06);
+  color: var(--text-primary);
+}
+
+.setting-check {
+  margin-left: auto;
+  color: #6366f1;
+  font-weight: 600;
+}

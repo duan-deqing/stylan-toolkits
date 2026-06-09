@@ -1,0 +1,41 @@
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s;
+  box-shadow: var(--shadow-raised);
+  isolation: isolate;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.card-header .card-hint {
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.card-body {
+  padding: 12px;
+}
+
+.card-inset {
+  background: inherit;
+  border-radius: 14px;
+  box-shadow:
+    4px 4px 8px 0px var(--shadow-color-dark) inset,
+    -4px -4px 8px 0px var(--shadow-color-light) inset;
+}
+
+.card-inset-lg {
+  padding: 12px 12px;
+}
